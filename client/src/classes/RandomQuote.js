@@ -6,10 +6,11 @@ class RandomQuote {
   static getRandomQuote() {
     const randomIndex = MathUtils.generateRandomInt(quotes.length);
     const { id, text, author } = quotes[randomIndex];
+
     return new Quote(id, text, author);
   }
 
-  static async getRandomQuoteViaAPI() {
+  static async getRandomQuoteViaPublicAPI() {
     const url = 'https://quoteslate.vercel.app/api/quotes/random';
 
     const options = {
@@ -20,13 +21,35 @@ class RandomQuote {
 
     try {
       const response = await fetch(url, options);
-
       const data = await response.json();
 
       const { id, quote, author } = data;
 
       if (id && quote && author) {
         return new Quote(id, quote, author);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  static async getRandomQuoteViaOwnAPI() {
+    const url = 'http://localhost:3000/quotes/random/single';
+
+    const options = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    try {
+      const response = await fetch(url, options);
+      const data = await response.json();
+
+      const { id, text, author } = data;
+
+      if (id && text && author) {
+        return new Quote(id, text, author);
       }
     } catch (error) {
       console.error(error);

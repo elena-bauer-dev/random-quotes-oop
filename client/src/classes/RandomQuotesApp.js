@@ -4,7 +4,12 @@ import Quote from './Quote.js';
 class RandomQuotesApp {
   constructor() {
     this.randomQuoteBtn = document.getElementById('random-quote-btn');
-    this.randomQuoteApiBtn = document.getElementById('random-quote-api-btn');
+    this.randomQuotePublicAPIBtn = document.getElementById(
+      'random-quote-public-api-btn',
+    );
+    this.randomQuoteOwnAPIBtn = document.getElementById(
+      'random-quote-own-api-btn',
+    );
     this.quoteTextElement = document.getElementById('quote-text');
     this.quoteAuthorElement = document.getElementById('quote-author');
     this.currentQuote = null;
@@ -27,16 +32,23 @@ class RandomQuotesApp {
     this.changeCurrentQuote(RandomQuote.getRandomQuote());
   }
 
-  async getRandomQuoteViaAPI() {
-    this.changeCurrentQuote(await RandomQuote.getRandomQuoteViaAPI());
+  async handlerRandomQuoteViaPublicAPI() {
+    this.changeCurrentQuote(await RandomQuote.getRandomQuoteViaPublicAPI());
+  }
+
+  async handlerRandomQuoteViaOwnAPI() {
+    this.changeCurrentQuote(await RandomQuote.getRandomQuoteViaOwnAPI());
   }
 
   init() {
     this.randomQuoteBtn.addEventListener('click', () =>
       this.randomQuoteHandler(),
     );
-    this.randomQuoteApiBtn.addEventListener('click', () =>
-      this.getRandomQuoteViaAPI(),
+    this.randomQuotePublicAPIBtn.addEventListener('click', () =>
+      this.handlerRandomQuoteViaPublicAPI(),
+    );
+    this.randomQuoteOwnAPIBtn.addEventListener('click', () =>
+      this.handlerRandomQuoteViaOwnAPI(),
     );
   }
 }

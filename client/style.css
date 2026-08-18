@@ -5,7 +5,7 @@ body {
 }
 
 .container {
-  max-width: 600px;
+  max-width: 700px;
   margin: 20px auto;
   text-align: center;
 }
@@ -49,8 +49,14 @@ body {
 .btn-secondary:hover {
   background-color: #7c3aed;
 }
+.btn-ternary {
+  background-color: #8ad12c;
+}
 
-/* Delete button style */
+.btn-ternary:hover {
+  background-color: #3caf0f;
+}
+
 .btn-danger {
   background-color: transparent;
   color: red;
